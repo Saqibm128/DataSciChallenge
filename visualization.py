@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import aggregation as agg
 
 if __name__ == "__main__":
@@ -10,9 +11,15 @@ if __name__ == "__main__":
         event["user_id"] = event["properties"]["user_id"]
 
     photoUploadsByUsers = agg.separateByAttr(photoUploadEvents, "user_id")
-    n, bins, patches = plt.hist([len(photoUploadsByUsers[key]) for key in photoUploadsByUsers.keys()], 5)
+    numEventsPerUser = [len(photoUploadsByUsers[key]) for key in photoUploadsByUsers.keys()]
+    n, bins, patches = plt.hist(numEventsPerUser,  10, (0, 25))
+    # print("Bins used", bins) #debug statement for visualization
     plt.title("Photo Upload Events By Users")
     plt.xlabel("Number of Users")
     plt.ylabel("Number of Photo Uploads")
+    plt.xlim(0, 25)
     plt.show()
-    
+
+    print("Mean Number of Events per User", np.mean(numEventsPerUser))
+    print("Median Number of Events per User", np.median(numEventsPerUser))
+    print("St. Dev of Number of Events per User", np.std(numEventsPerUser))
