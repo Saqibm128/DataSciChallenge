@@ -14,9 +14,16 @@ def separateByAttr(eventInstances, attr):
         eventsByAttr[eventAttr].append(eventInstance)
     return eventsByAttr
 
-def generateSeparatedByEventType():
+def getInputData():
     from input_data import INPUT_DATA
-    return separateByAttr(INPUT_DATA, "event")
+    #user_id is nested into the properties attribute, so we just place another attribute
+    #   user_id directly into each event
+    for event in INPUT_DATA:
+        event["user_id"] = event["properties"]["user_id"]
+    return INPUT_DATA
+
+def generateSeparatedByEventType():
+    return separateByAttr(getInputData(), "event")
 
 
 #Sanity check to see the number of events and each event type

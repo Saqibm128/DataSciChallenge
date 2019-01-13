@@ -5,10 +5,6 @@ import aggregation as agg
 if __name__ == "__main__":
     separatedByEventType = agg.generateSeparatedByEventType()
     photoUploadEvents = separatedByEventType["PhotoUpload"]
-    #user_id is nested into the properties attribute, so we just place another attribute
-    #   user_id directly into each event
-    for event in photoUploadEvents:
-        event["user_id"] = event["properties"]["user_id"]
 
     photoUploadsByUsers = agg.separateByAttr(photoUploadEvents, "user_id")
     numEventsPerUser = [len(photoUploadsByUsers[key]) for key in photoUploadsByUsers.keys()]
@@ -20,6 +16,11 @@ if __name__ == "__main__":
     plt.xlim(0, 25)
     plt.show()
 
-    print("Mean Number of Events per User", np.mean(numEventsPerUser))
+    totalNumberOfEvents = sum([len(separatedByEventType[key]) for key in separatedByEventType.keys()])
+
+    separatedByUsers = agg.separateByAttr(agg.getInputData(), "user_id")
+    print("Proportion of Users Generating PhotoUpload Events", len(photoUploadsByUsers.keys())/len(separatedByUsers.keys()), " ({}/{})".format(len(photoUploadsByUsers.keys()), len(separatedByUsers.keys())))
+    print("Proportion of PhotoUpload Events", len(separatedByEventType["PhotoUpload"])/totalNumberOfEvents, " ({}/{})".format(len(separatedByEventType["PhotoUpload"]), totalNumberOfEvents))
+    print("Mean Number of Events per User", np.mean(numEventsPerUser), " ({}/{})".format(len(separatedByEventType["PhotoUpload"]), len(photoUploadsByUsers.keys())))
     print("Median Number of Events per User", np.median(numEventsPerUser))
     print("St. Dev of Number of Events per User", np.std(numEventsPerUser))
