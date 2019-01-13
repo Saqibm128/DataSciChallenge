@@ -14,9 +14,9 @@ if __name__ == "__main__":
     numEventsPerUser = [len(photoUploadsByUsers[key]) for key in photoUploadsByUsers.keys()]
     n, bins, patches = plt.hist(numEventsPerUser,  10, (0, 25))
     # print("Bins used", bins) #debug statement for visualization
-    plt.title("Photo Upload Events By Users")
-    plt.xlabel("Number of Users")
-    plt.ylabel("Number of Photo Uploads")
+    plt.title("PhotoUpload Event Frequency Per User")
+    plt.xlabel("Number of Photo Uploads per User")
+    plt.ylabel("Number of Users")
     plt.xlim(0, 25)
     plt.show()
 
