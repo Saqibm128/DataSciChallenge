@@ -15,15 +15,19 @@ def separateByAttr(eventInstances, attr):
     return eventsByAttr
 
 def getInputData():
+    '''
+    gets the input_data, moves "user_id" to top-level
+    '''
     from input_data import INPUT_DATA
-    #user_id is nested into the properties attribute, so we just place another attribute
-    #   user_id directly into each event
     for event in INPUT_DATA:
         event["user_id"] = event["properties"]["user_id"]
     return INPUT_DATA
 
-def generateSeparatedByEventType():
-    return separateByAttr(getInputData(), "event")
+def generateSeparatedByEventType(input_data = getInputData()):
+    '''
+    separates input_data by the event type
+    '''
+    return separateByAttr(input_data, "event")
 
 
 #Sanity check to see the number of events and each event type
