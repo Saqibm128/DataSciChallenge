@@ -5,4 +5,4 @@ The PhotoUpload event is one of 4 events within the data, making up approximatel
 
 ## Visualization of PhotoUpload Event Frequency per User
 
-![Histogram of PhotoUpload Events Per User showing a bimodal distribution with skewed tail towards left.](.\PhotoUploadEventsPerUserHistogram.png)
+![Histogram of PhotoUpload Events Per User showing a bimodal distribution with skewed tail towards left.](./PhotoUploadEventsPerUserHistogram.png)
